@@ -1,15 +1,9 @@
-
-# coding: utf-8
-
-# In[ ]:
-
-
 from __future__ import print_function
 import mxnet as mx
 from mxnet import nd, autograd
 from mxnet import gluon
 import numpy as np
-ctx = mx.gpu()
+ctx = mx.cpu()
 mx.random.seed(1)
 
 batch_size = 64
@@ -54,11 +48,6 @@ def evaluate_accuracy(data_iterator, net):
         predictions = nd.argmax(output, axis=1)
         acc.update(preds=predictions, labels=label)
     return acc.get()[1]
-
-
-
-# In[ ]:
-
 
 # Training loop
 epochs = 10
