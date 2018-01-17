@@ -1,5 +1,4 @@
 %matplotlib inline
-# import matplotlib as plt
 import math,numpy as np
 from numpy.random import random
 from matplotlib import pyplot as plt, rcParams, animation, rc
@@ -7,57 +6,57 @@ from ipywidgets.widgets import *
 rc('animation', html='html5')
 
 #################################################################################
-# Define a line as y = ax + b
+# Define a line as y = mx + b
 
 def lin(m,b,x): return m*x+b
 
-# Create end values
 #################################################################################
+# Create end values
 
 m=3.
 b=8.
 
-# Create 30 random points. For x set as random. For y use our definition
 #################################################################################
+# Create 30 random points. For x set as random. For y use our line definition
 
 n=30
 x = random(n)
 y = lin(m,b,x)
 
 #################################################################################
-
 x
 
 #################################################################################
-
 y
 
 #################################################################################
+# Take a look
 
 plt.scatter(x,y)
 
 #################################################################################
+# Define sum of squared errors, loss and average loss functions
 
 def sumSqErr(y,y_pred): return ((y-y_pred)**2).sum()
 def loss(y,a,b,x): return sumSqErr(y, lin(m,b,x))
 def avg_loss(y,a,b,x): return np.sqrt(loss(y,m,b,x)/n)
 
-# Set some starting values. 
 #################################################################################
+# Set the starting guesses 
 
 m_guess=-1.
 b_guess=1.
 avg_loss(y, m_guess, b_guess, x)
 
-# Set a learning rate of 0.01
 #################################################################################
+# Set a learning rate of 0.01
 
 lr=0.01
+
+#################################################################################
+# Update function using derivative of each step
 # d[(y-(a*x+b))**2,b] = 2 (b + a x - y)      = 2 (y_pred - y)
 # d[(y-(a*x+b))**2,a] = 2 x (b + a x - y)    = x * dy/db
-
-# Update function using derivative of each step
-#################################################################################
 
 def upd():
     global m_guess, b_guess
@@ -74,6 +73,7 @@ def upd():
     b_guess -= lr*dydb.mean()
     
 #################################################################################
+# Run the model
 
 epochs = 10
 fig = plt.figure(dpi=100, figsize=(5, 4))
