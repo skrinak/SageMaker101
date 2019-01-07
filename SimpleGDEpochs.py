@@ -38,8 +38,8 @@ plt.scatter(x,y)
 # Define sum of squared errors, loss and average loss functions
 
 def sumSqErr(y,y_pred): return ((y-y_pred)**2).sum()
-def loss(y,a,b,x): return sumSqErr(y, lin(m,b,x))
-def avg_loss(y,a,b,x): return np.sqrt(loss(y,m,b,x)/n)
+def loss(y,m,b,x): return sumSqErr(y, lin(m,b,x))
+def avg_loss(y,m,b,x): return np.sqrt(loss(y,m,b,x)/n)
 
 #################################################################################
 # Set the starting guesses 
